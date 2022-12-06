@@ -21,16 +21,16 @@ public class PacketReceiver implements Runnable {
             while (true) {
 
                 byte[] header = new byte[Constants.SEGMENT_SIZE];
-                stream.read(header, 0, header.length);
+                stream.read(header);
                 int packetID = ByteBuffer.wrap(header).order(ByteOrder.LITTLE_ENDIAN).getInt();
 
                 if (packetID == 1) {
                     byte[] body = new byte[Constants.PACKET_SIZE - Constants.SEGMENT_SIZE];
-                    stream.read(body, 0, body.length);
+                    stream.read(body);
                     packetSender.addPacket(new Packet(mergeArrays(header, body)));
                 } else {
                     byte[] body = new byte[Constants.CANCEL_PACKET_SIZE - Constants.SEGMENT_SIZE];
-                    stream.read(body, 0, body.length);
+                    stream.read(body);
                     System.out.println("***Cancel packet***");
                 }
 
