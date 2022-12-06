@@ -62,6 +62,7 @@ public class PacketSender extends Thread {
 
     private void sendPacket(Packet packet, OutputStream outputStream) throws IOException {
         outputStream.write(packet.getBytes());
+        outputStream.flush();
         repository.removePacket(packet);
         packets.remove(packet);
         System.out.println("Return to server [" + System.currentTimeMillis() + "] " + packet + " Ping: " +
