@@ -27,8 +27,6 @@ public class PacketSender extends Thread {
         if (pastPackets != null && !pastPackets.isEmpty()) {
             this.packets.addAll(repository.getAllPackets());
         }
-
-        this.start();
     }
 
     public void addPacket(Packet packet) {

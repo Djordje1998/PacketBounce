@@ -18,6 +18,7 @@ public class PacketReceiver implements Runnable {
              DataInputStream stream = new DataInputStream(socket.getInputStream())) {
 
             PacketSender packetSender = new PacketSender(socket);
+            packetSender.start();
             while (true) {
 
                 byte[] header = new byte[Constants.SEGMENT_SIZE];
