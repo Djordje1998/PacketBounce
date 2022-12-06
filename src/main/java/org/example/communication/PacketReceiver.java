@@ -37,7 +37,7 @@ public class PacketReceiver implements Runnable {
 
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
