@@ -19,9 +19,9 @@ public class PacketReceiver implements Runnable {
 
             PacketSender packetSender = new PacketSender(socket);
             packetSender.start();
-            while (true) {
 
-                byte[] header = new byte[Constants.SEGMENT_SIZE];
+            byte[] header = new byte[Constants.SEGMENT_SIZE];
+            while (true) {
                 stream.read(header);
                 int packetID = ByteBuffer.wrap(header).order(ByteOrder.LITTLE_ENDIAN).getInt();
 

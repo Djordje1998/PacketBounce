@@ -44,11 +44,8 @@ public class PacketSender extends Thread {
                     long timeLeft = System.currentTimeMillis() - (packet.getArrivalTime() + packet.getDelayInSeconds() * 1000L);
                     if (timeLeft >= 0 && timeLeft <= Constants.ACCEPTABLE_DELAY) {
                         sendPacket(packet, outputStream);
-                        break;
-                    }
-                    if (timeLeft > Constants.ACCEPTABLE_DELAY) {
+                    }else if (timeLeft > Constants.ACCEPTABLE_DELAY) {
                         notifyExpiredPacket(packet);
-                        break;
                     }
                 }
             }
