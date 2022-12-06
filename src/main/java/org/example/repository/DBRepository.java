@@ -8,13 +8,6 @@ import java.util.List;
 
 public class DBRepository implements Repository {
 
-//    private final EntityManager entityManager;
-//
-//    public DBRepository() {
-//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME);
-//        this.entityManager = entityManagerFactory.createEntityManager();
-//    }
-
     @Override
     public void addPacket(Packet packet) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(Constants.PERSISTENCE_UNIT_NAME);
@@ -24,7 +17,7 @@ public class DBRepository implements Repository {
         entityManager.persist(packet);
         entityManager.getTransaction().commit();
 
-        entityManager.clear();
+        entityManager.close();
         entityManagerFactory.close();
     }
 
@@ -38,7 +31,7 @@ public class DBRepository implements Repository {
         entityManager.remove(foundPacket);
         entityManager.getTransaction().commit();
 
-        entityManager.clear();
+        entityManager.close();
         entityManagerFactory.close();
     }
 
@@ -51,7 +44,7 @@ public class DBRepository implements Repository {
         List<Packet> existingPackets = entityManager.createQuery("SELECT p FROM Packet p", Packet.class).getResultList();
         entityManager.getTransaction().commit();
 
-        entityManager.clear();
+        entityManager.close();
         entityManagerFactory.close();
 
         return existingPackets;
